@@ -30,4 +30,8 @@ public class AlarmRepository {
     public LiveData<List<Alarm>> getAlarmsLiveData() {
         return alarmsLiveData;
     }
+
+    public Alarm getTheAlarm() {
+		return alarmDao.getTheAlarm();
+	}
 }

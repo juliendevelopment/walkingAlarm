@@ -21,19 +21,31 @@ public class Alarm {
     private int alarmId;
 
     private int hour, minute;
-    private boolean started;
+    private boolean enable;
 
     private long created;
 
-    public Alarm(int alarmId, int hour, int minute, long created, boolean started) {
+    public Alarm(int alarmId, int hour, int minute, long created, boolean enable) {
         this.alarmId = alarmId;
         this.hour = hour;
         this.minute = minute;
-        this.started = started;
+        this.enable = enable;
         this.created = created;
     }
 
-    public int getAlarmId() {
+	public void setHour(int hour) {
+		this.hour = hour;
+	}
+
+	public void setMinute(int minute) {
+		this.minute = minute;
+	}
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
+
+	public int getAlarmId() {
         return alarmId;
     }
 
@@ -45,8 +57,8 @@ public class Alarm {
         return minute;
     }
 
-    public boolean isStarted() {
-        return started;
+    public boolean isEnable() {
+        return enable;
     }
 
     public long getCreated() {
@@ -87,7 +99,7 @@ public class Alarm {
                 alarmPendingIntent
         );
 
-        this.started = true;
+        this.enable = true;
     }
 
     public void cancelAlarm(Context context) {
@@ -95,7 +107,7 @@ public class Alarm {
         Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
         PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0);
         alarmManager.cancel(alarmPendingIntent);
-        this.started = false;
+        this.enable = false;
 
         String toastText = String.format("Alarm cancelled for %02d:%02d with id %d", hour, minute, alarmId);
         Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
@@ -108,7 +120,7 @@ public class Alarm {
 			   "alarmId=" + alarmId +
 			   ", hour=" + hour +
 			   ", minute=" + minute +
-			   ", started=" + started +
+			   ", enable=" + enable +
 			   ", created=" + created +
 			   '}';
 	}

@@ -21,4 +21,8 @@ public interface AlarmDao {
 
     @Update
     void update(Alarm alarm);
+
+	@Query("SELECT * FROM alarm_table WHERE alarmId = 1")
+	Alarm getTheAlarm();
+
 }

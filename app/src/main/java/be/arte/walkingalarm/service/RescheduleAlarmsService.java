@@ -26,7 +26,7 @@ public class RescheduleAlarmsService extends LifecycleService {
             @Override
             public void onChanged(List<Alarm> alarms) {
                 for (Alarm a : alarms) {
-                    if (a.isStarted()) {
+                    if (a.isEnable()) {
                         a.schedule(getApplicationContext());
                     }
                 }
