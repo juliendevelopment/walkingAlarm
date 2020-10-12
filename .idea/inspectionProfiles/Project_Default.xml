@@ -1,0 +1,153 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="Duplicates" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="myFilterOutGeneratedCode" value="true" />
+    </inspection_tool>
+    <inspection_tool class="InconsistentLineSeparators" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="MissingOverrideAnnotation" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreObjectMethods" value="true" />
+      <option name="ignoreAnonymousClassMethods" value="false" />
+    </inspection_tool>
+    <inspection_tool class="SSBasedInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Tests" level="WARNING" enabled="true">
+        <replaceConfiguration name="byteArray to String" created="1532957885238" text="new String($byteArray$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="new String($byteArray$, java.nio.charset.StandardCharsets.UTF_8);">
+          <constraint name="__context__" within="" contains="" />
+          <constraint name="byteArray" within="" contains="" />
+        </replaceConfiguration>
+        <replaceConfiguration name="String to byteArray" created="1532957885238" text="$string$.getBytes();" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="$string$.getBytes(java.nio.charset.StandardCharsets.UTF_8);">
+          <constraint name="__context__" within="" contains="" />
+          <constraint name="string" nameOfExprType="String" within="" contains="" />
+        </replaceConfiguration>
+        <replaceConfiguration name="assertTrue_Collection" text="org.junit.Assert.assertTrue($collection$.contains($object$));" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="org.assertj.core.api.Assertions.assertThat($collection$).contains($object$);">
+          <constraint name="__context__" within="" contains="" />
+          <constraint name="collection" nameOfExprType="java.util.Collection" target="true" within="" contains="" />
+          <constraint name="object" nameOfExprType="Object" within="" contains="" />
+        </replaceConfiguration>
+        <replaceConfiguration name="assertTrue" text="org.junit.Assert.assertTrue($condition$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="org.assertj.core.api.Assertions.assertThat($condition$).isTrue();">
+          <constraint name="__context__" target="true" within="" contains="" />
+          <constraint name="condition" nameOfExprType="Boolean|boolean" nameOfFormalType="Boolean|boolean" within="" contains="" />
+        </replaceConfiguration>
+        <replaceConfiguration name="assertTrue_withMessage" text="org.junit.Assert.assertTrue($message$, $condition$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="org.assertj.core.api.Assertions.assertThat($condition$).as($message$).isTrue();">
+          <constraint name="__context__" target="true" within="" contains="" />
+          <constraint name="message" nameOfExprType="String" within="" contains="" />
+          <constraint name="condition" nameOfExprType="Boolean|boolean" within="" contains="" />
+        </replaceConfiguration>
+        <replaceConfiguration name="junit_assertFalse" text="org.junit.Assert.assertFalse($condition$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="org.assertj.core.api.Assertions.assertThat($condition$).isFalse();">
+          <constraint name="__context__" target="true" within="" contains="" />
+          <constraint name="condition" within="" contains="" />
+        </replaceConfiguration>
+        <replaceConfiguration name="assertFalse_withMessage" text="org.junit.Assert.assertFalse($message$, $condition$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="org.assertj.core.api.Assertions.assertThat($condition$).as($message$).isFalse();">
+          <constraint name="__context__" target="true" within="" contains="" />
+          <constraint name="message" nameOfExprType="String" within="" contains="" />
+          <constraint name="condition" nameOfExprType="Boolean|boolean" within="" contains="" />
+        </replaceConfiguration>
+        <replaceConfiguration name="assertEquals_Collection_Size" text="org.junit.Assert.assertEquals($size$, $collection$.size());" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="org.assertj.core.api.Assertions.assertThat($collection$).hasSize($size$);">
+          <constraint name="size" nameOfExprType="int" within="" contains="" />
+          <constraint name="collection" nameOfFormalType="Collection" exprTypeWithinHierarchy="true" formalTypeWithinHierarchy="true" within="" contains="" />
+        </replaceConfiguration>
+        <replaceConfiguration name="assertEquals_Objects" text="org.junit.Assert.assertEquals($o1$, $o2$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="org.assertj.core.api.Assertions.assertThat($o2$).isEqualTo($o1$);">
+          <constraint name="o2" within="" contains="" />
+          <constraint name="o1" within="" contains="" />
+        </replaceConfiguration>
+        <replaceConfiguration name="assertEquals_Objects_withMessage" text="org.junit.Assert.assertEquals($message$, $o1$, $o2$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="org.assertj.core.api.Assertions.assertThat($o2$).as($message$).isEqualTo($o1$);">
+          <constraint name="o2" within="" contains="" />
+          <constraint name="message" nameOfExprType="String" within="" contains="" />
+          <constraint name="o1" within="" contains="" />
+        </replaceConfiguration>
+        <replaceConfiguration name="assertThat_Object_hamcrest" text="org.hamcrest.MatcherAssert.assertThat($o1$, org.hamcrest.core.Is.is($o2$));" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="org.assertj.core.api.Assertions.assertThat($o1$).isEqualTo($o2$);">
+          <constraint name="o1" within="" contains="" />
+          <constraint name="o2" within="" contains="" />
+        </replaceConfiguration>
+        <replaceConfiguration name="assertNotNull" text="org.junit.Assert.assertNull($o1$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="org.assertj.core.api.Assertions.assertThat($o1$).isNull();">
+          <constraint name="o1" within="" contains="" />
+        </replaceConfiguration>
+        <replaceConfiguration name="assertThat_Integer_ValueOf" text="org.assertj.core.api.Assertions.assertThat($i1$).isEqualTo(Integer.valueOf($i2$));" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="org.assertj.core.api.Assertions.assertThat($i1$).isEqualTo($i2$);">
+          <constraint name="i1" nameOfExprType="Integer" within="" contains="" />
+          <constraint name="i2" nameOfExprType="int" within="" contains="" />
+        </replaceConfiguration>
+        <replaceConfiguration name="assertThat_Null" text="org.assertj.core.api.Assertions.assertThat($o1$).isEqualTo(null);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="org.assertj.core.api.Assertions.assertThat($o1$).isNull();">
+          <constraint name="__context__" target="true" within="" contains="" />
+          <constraint name="o1" within="" contains="" />
+        </replaceConfiguration>
+        <replaceConfiguration name="assertj_equalTo_True" text="org.assertj.core.api.Assertions.assertThat($condition$).isEqualTo(true);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="org.assertj.core.api.Assertions.assertThat($condition$).isTrue();">
+          <constraint name="condition" nameOfExprType="Boolean|boolean" within="" contains="" />
+        </replaceConfiguration>
+        <replaceConfiguration name="assertj_equalTo_false" text="org.assertj.core.api.Assertions.assertThat($condition$).isEqualTo(false);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="org.assertj.core.api.Assertions.assertThat($condition$).isFalse();">
+          <constraint name="condition" nameOfExprType="Boolean|boolean" within="" contains="" />
+        </replaceConfiguration>
+        <replaceConfiguration name="assertJ_fail" created="1533627230812" text="Assert.fail($expression$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="org.assertj.core.api.Fail.fail($expression$);">
+          <constraint name="expression" nameOfExprType="String" within="" contains="" />
+        </replaceConfiguration>
+        <replaceConfiguration name="assertJ_fail_noMessage" created="1533627230812" text="Assert.fail();" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="org.assertj.core.api.Fail.fail(&quot;&quot;);" />
+        <replaceConfiguration name="assertException" created="1533641568851" text="@Test&#10;public void $testName$() {&#10;&#9;$statementsBefore$;&#10;&#9;try {&#10;&#9;&#9;$statementsInTry$;&#10;&#9;&#9;Fail.fail($message$);&#10;&#9;} catch ($Exception$ $exVar$) {&#10;&#9;}&#10;}" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="@Test(expected = $Exception$.class)&#10;public void $testName$() throws $Exception$ {&#10;&#9;$statementsBefore$;&#10;&#9;&#10;&#9;$statementsInTry$;&#10;}">
+          <constraint name="Exception" within="" contains="" />
+          <constraint name="statementsBefore" minCount="0" maxCount="2147483647" within="" contains="" />
+          <constraint name="statementsInTry" maxCount="2147483647" within="" contains="" />
+          <constraint name="message" minCount="0" within="" contains="" />
+          <constraint name="__context__" target="true" within="" contains="" />
+          <constraint name="testName" regexp="test.*" within="" contains="" />
+          <constraint name="exVar" within="" contains="" />
+        </replaceConfiguration>
+        <searchConfiguration name="Ternary condition is more than 150 char" text="$Expr0$ ? $Expr1$ : $Expr2$" recursive="false" caseInsensitive="false" type="JAVA">
+          <constraint name="__context__" script="&quot;__context__.getText().length()&gt;150&quot;" exprTypeWithinHierarchy="true" formalTypeWithinHierarchy="true" target="true" within="" contains="" />
+          <constraint name="Expr1" exprTypeWithinHierarchy="true" within="" contains="" />
+          <constraint name="Expr2" exprTypeWithinHierarchy="true" within="" contains="" />
+          <constraint name="Expr0" exprTypeWithinHierarchy="true" within="" contains="" />
+        </searchConfiguration>
+      </scope>
+      <replaceConfiguration name="byteArray to String" created="1532957885238" text="new String($byteArray$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="new String($byteArray$, java.nio.charset.StandardCharsets.UTF_8);">
+        <constraint name="__context__" within="" contains="" />
+        <constraint name="byteArray" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="String to byteArray" created="1532957885238" text="$string$.getBytes();" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="$string$.getBytes(java.nio.charset.StandardCharsets.UTF_8);">
+        <constraint name="__context__" within="" contains="" />
+        <constraint name="string" nameOfExprType="String" within="" contains="" />
+      </replaceConfiguration>
+      <searchConfiguration name="Ternary condition is more than 150 char" text="$Expr0$ ? $Expr1$ : $Expr2$" recursive="false" caseInsensitive="false" type="JAVA">
+        <constraint name="__context__" script="&quot;__context__.getText().length()&gt;150&quot;" exprTypeWithinHierarchy="true" formalTypeWithinHierarchy="true" target="true" within="" contains="" />
+        <constraint name="Expr1" exprTypeWithinHierarchy="true" within="" contains="" />
+        <constraint name="Expr2" exprTypeWithinHierarchy="true" within="" contains="" />
+        <constraint name="Expr0" exprTypeWithinHierarchy="true" within="" contains="" />
+      </searchConfiguration>
+    </inspection_tool>
+    <inspection_tool class="SerializableHasSerialVersionUIDField" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreAnonymousInnerClasses" value="false" />
+      <option name="superClassString" value="" />
+    </inspection_tool>
+    <inspection_tool class="WeakerAccess" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Tests" level="WARNING" enabled="true">
+        <option name="SUGGEST_PACKAGE_LOCAL_FOR_MEMBERS" value="true" />
+        <option name="SUGGEST_PACKAGE_LOCAL_FOR_TOP_CLASSES" value="false" />
+        <option name="SUGGEST_PRIVATE_FOR_INNERS" value="false" />
+      </scope>
+      <option name="SUGGEST_PACKAGE_LOCAL_FOR_MEMBERS" value="true" />
+      <option name="SUGGEST_PACKAGE_LOCAL_FOR_TOP_CLASSES" value="true" />
+      <option name="SUGGEST_PRIVATE_FOR_INNERS" value="false" />
+    </inspection_tool>
+    <inspection_tool class="unused" enabled="true" level="WARNING" enabled_by_default="true" test_entries="false">
+      <scope name="Tests" level="WARNING" enabled="false" test_entries="false">
+        <option name="LOCAL_VARIABLE" value="true" />
+        <option name="FIELD" value="true" />
+        <option name="METHOD" value="true" />
+        <option name="CLASS" value="true" />
+        <option name="PARAMETER" value="true" />
+        <option name="REPORT_PARAMETER_FOR_PUBLIC_METHODS" value="true" />
+        <option name="ADD_MAINS_TO_ENTRIES" value="true" />
+        <option name="ADD_APPLET_TO_ENTRIES" value="true" />
+        <option name="ADD_SERVLET_TO_ENTRIES" value="true" />
+        <option name="ADD_NONJAVA_TO_ENTRIES" value="true" />
+      </scope>
+      <option name="LOCAL_VARIABLE" value="true" />
+      <option name="FIELD" value="true" />
+      <option name="METHOD" value="true" />
+      <option name="CLASS" value="true" />
+      <option name="PARAMETER" value="true" />
+      <option name="REPORT_PARAMETER_FOR_PUBLIC_METHODS" value="true" />
+      <option name="ADD_MAINS_TO_ENTRIES" value="true" />
+      <option name="ADD_APPLET_TO_ENTRIES" value="true" />
+      <option name="ADD_SERVLET_TO_ENTRIES" value="true" />
+      <option name="ADD_NONJAVA_TO_ENTRIES" value="true" />
+    </inspection_tool>
+  </profile>
+</component>
