@@ -2,16 +2,24 @@ package be.arte.walkingalarm;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import be.arte.walkingalarm.service.AlarmService;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RingActivity extends AppCompatActivity {
-//    @BindView(R.id.activity_ring_dismiss) Button dismiss;
+    @BindView(R.id.activity_ring_dismiss)
+	Button dismiss;
     @BindView(R.id.activity_ring_clock) ImageView clock;
+    @BindView(R.id.activity_ring_step)
+	TextView stepsDisplay;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -20,16 +28,18 @@ public class RingActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-//        dismiss.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intentService = new Intent(getApplicationContext(), AlarmService.class);
-//                getApplicationContext().stopService(intentService);
-//                finish();
-//            }
-//        });
+        dismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentService = new Intent(getApplicationContext(), AlarmService.class);
+                getApplicationContext().stopService(intentService);
+                finish();
+            }
+        });
 
         animateClock();
+
+        //TODO getStep
     }
 
     private void animateClock() {

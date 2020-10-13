@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 		theAlarm.setEnable(enableSwitch.isChecked());
 		createAlarmViewModel.update(theAlarm);
 		// TODO
-		//alarm.schedule(getApplicationContext());
+		theAlarm.schedule(getApplicationContext());
 		Toast.makeText(getApplicationContext(), theAlarm.toString(), Toast.LENGTH_LONG).show();
 	}
 }

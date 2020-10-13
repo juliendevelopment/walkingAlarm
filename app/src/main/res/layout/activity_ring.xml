@@ -27,23 +27,30 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/ic_alarm_black_24dp"
         />
-
-    <Button
-        android:id="@+id/activity_ring_dismiss"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Dismiss"
-        app:layout_constraintBottom_toTopOf="@+id/activity_ring_snooze"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/activity_ring_snooze"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Snooze"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+	
+	<Button
+			android:id="@+id/activity_ring_dismiss"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:text="Dismiss"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			tools:layout_editor_absoluteY="99dp" />
+	
+	<TextView
+			android:id="@+id/activity_ring_step"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="TextView"
+			tools:layout_editor_absoluteX="108dp"
+			tools:layout_editor_absoluteY="49dp" />
+	
+	<TextView
+			android:id="@+id/textView3"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Steps : "
+			tools:layout_editor_absoluteX="37dp"
+			tools:layout_editor_absoluteY="49dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

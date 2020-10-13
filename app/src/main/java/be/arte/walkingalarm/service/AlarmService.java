@@ -17,15 +17,15 @@ import be.arte.walkingalarm.RingActivity;
 import be.arte.walkingalarm.broadcastreceiver.AlarmBroadcastReceiver;
 
 public class AlarmService extends Service {
-    private MediaPlayer mediaPlayer; //TODO disable media player
+    //private MediaPlayer mediaPlayer; //TODO disable media player
     private Vibrator vibrator;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.alarm);
-        mediaPlayer.setLooping(true);
+        //mediaPlayer = MediaPlayer.create(this, R.raw.alarm);
+        //mediaPlayer.setLooping(true);
 
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -45,7 +45,7 @@ public class AlarmService extends Service {
                 .setContentIntent(pendingIntent)
                 .build();
 
-        mediaPlayer.start();
+        //mediaPlayer.start();
 
         long[] pattern = { 0, 100, 1000 };
         vibrator.vibrate(pattern, 0);
@@ -59,7 +59,7 @@ public class AlarmService extends Service {
     public void onDestroy() {
         super.onDestroy();
 
-        mediaPlayer.stop();
+        //mediaPlayer.stop();
         vibrator.cancel();
     }
 
