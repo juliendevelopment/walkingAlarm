@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.os.Vibrator;
+import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import be.arte.walkingalarm.App;
@@ -23,7 +24,7 @@ public class AlarmService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-
+		Log.i("AlarmService","onCreate()" );
         //mediaPlayer = MediaPlayer.create(this, R.raw.alarm);
         //mediaPlayer.setLooping(true);
 

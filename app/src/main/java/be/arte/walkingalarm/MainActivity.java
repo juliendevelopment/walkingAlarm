@@ -1,7 +1,5 @@
 package be.arte.walkingalarm;
 
-import java.util.Random;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -53,22 +51,19 @@ public class MainActivity extends AppCompatActivity {
 		timePicker.setHour(theAlarm.getHour());
 		timePicker.setMinute(theAlarm.getMinute());
 
-		scheduleAlarm.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				scheduleAlarm();
+		scheduleAlarm.setOnClickListener(v -> {
+			updateAlarm();
+			if (theAlarm.isEnable()) {
+				theAlarm.schedule(getApplicationContext());
 			}
 		});
 
 	}
 
-	private void scheduleAlarm() {
+	private void updateAlarm() {
 		theAlarm.setHour(TimePickerUtil.getTimePickerHour(timePicker));
 		theAlarm.setMinute(TimePickerUtil.getTimePickerMinute(timePicker));
 		theAlarm.setEnable(enableSwitch.isChecked());
 		createAlarmViewModel.update(theAlarm);
-		// TODO
-		theAlarm.schedule(getApplicationContext());
-		Toast.makeText(getApplicationContext(), theAlarm.toString(), Toast.LENGTH_LONG).show();
 	}
 }

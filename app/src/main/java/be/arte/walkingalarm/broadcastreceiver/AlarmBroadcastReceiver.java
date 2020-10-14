@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 import android.widget.Toast;
 import be.arte.walkingalarm.service.AlarmService;
 import be.arte.walkingalarm.service.RescheduleAlarmsService;
@@ -23,16 +24,11 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        //if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
-        //    String toastText = String.format("Alarm Reboot");
-        //    Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
-        //    startRescheduleAlarmsService(context);
-        //}
-        //else {
+		Log.i("TAG", "onReceive receiver");
+		Toast.makeText(context, "onReceive receiver", Toast.LENGTH_LONG).show();
             String toastText = String.format("Alarm Received");
             Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
             startAlarmService(context, intent);
-        //}
     }
 
 	private void startAlarmService(Context context, Intent intent) {

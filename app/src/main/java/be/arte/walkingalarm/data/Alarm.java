@@ -70,7 +70,7 @@ public class Alarm {
 
         Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
 
-        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0);
+        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
@@ -87,11 +87,11 @@ public class Alarm {
 
         String toastText = null;
         try {
-            toastText = String.format("One Time Alarm %s scheduled for %s at %02d:%02d", DayUtil.toDay(calendar.get(Calendar.DAY_OF_WEEK)), hour, minute, alarmId);
+            toastText = String.format("Alarm scheduled for %s at %02d:%02d", DayUtil.toDay(calendar.get(Calendar.DAY_OF_WEEK)), hour, minute, alarmId);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Toast.makeText(context, toastText, Toast.LENGTH_LONG).show();
+
 
         alarmManager.setExact(
                 AlarmManager.RTC_WAKEUP,
@@ -99,7 +99,8 @@ public class Alarm {
                 alarmPendingIntent
         );
 
-        this.enable = true;
+		Log.i("Alarm", "schedule");
+		Toast.makeText(context, toastText, Toast.LENGTH_LONG).show();
     }
 
     public void cancelAlarm(Context context) {
@@ -111,7 +112,7 @@ public class Alarm {
 
         String toastText = String.format("Alarm cancelled for %02d:%02d with id %d", hour, minute, alarmId);
         Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
-        Log.i("cancel", toastText);
+        Log.i("Alarm", toastText);
     }
 
 	@Override
