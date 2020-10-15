@@ -7,4 +7,5 @@
 	<string name="hello_world">Hello Square World!</string>
 	<string name="on_off">on/off</string>
 	<string name="schedule_alarm">schedule alarm</string>
+	<string name="Dismiss">Dismiss</string>
 </resources>

@@ -11,6 +11,12 @@ for wear os.
 
 [otther example](https://www.journaldev.com/27681/android-alarmmanager-broadcast-receiver-and-service)
 
+## doc 
+
+[sensor](https://developer.android.com/guide/topics/sensors/sensors_motion.html#java)
+
+
+
 ## step
 [] redo the app for wear os simple alarm
 [] add the system of stop when you walk
