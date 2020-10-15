@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import be.arte.walkingalarm.service.AlarmService;
@@ -42,13 +43,13 @@ public class RingActivity extends AppCompatActivity implements SensorEventListen
 		dismiss.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismissAlarm();
+
+				Toast.makeText(getApplicationContext(), "walk lazy !!! ", Toast.LENGTH_LONG).show();
+				//dismissAlarm();
 			}
 		});
 
 		animateClock();
-
-		//TODO getStep
 	}
 
 	private void dismissAlarm() {
@@ -87,7 +88,7 @@ public class RingActivity extends AppCompatActivity implements SensorEventListen
 			currentStep += value;
 		}
 		// For test only. Only allowed value is 1.0 i.e. for step taken
-		stepsDisplay.setText(currentStep +"");
+		stepsDisplay.setText(currentStep + " / " + MAX_STEP);
 
 		if (currentStep > MAX_STEP) {
 			dismissAlarm();

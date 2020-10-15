@@ -11,9 +11,13 @@ for wear os.
 
 [otther example](https://www.journaldev.com/27681/android-alarmmanager-broadcast-receiver-and-service)
 
+
+[endless service](https://robertohuertas.com/2019/06/29/android_foreground_services/)
 ## doc 
 
 [sensor](https://developer.android.com/guide/topics/sensors/sensors_motion.html#java)
+
+
 
 
 
