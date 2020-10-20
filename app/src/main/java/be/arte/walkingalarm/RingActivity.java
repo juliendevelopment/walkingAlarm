@@ -1,6 +1,5 @@
 package be.arte.walkingalarm;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -13,7 +12,6 @@ import android.os.PowerManager;
 import android.os.Vibrator;
 import android.support.wearable.activity.WearableActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,7 +48,7 @@ public class RingActivity extends WearableActivity implements SensorEventListene
 		Log.d("RingActivity", "onCreate()");
 
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.ring_activity_2);
+		setContentView(R.layout.activity_ring);
 
 		sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		sensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
@@ -81,7 +79,6 @@ public class RingActivity extends WearableActivity implements SensorEventListene
 
 		if(!isDismissed){
 			Log.d("RingActivity", "onResume");
-			animateClock();
 			setAmbientEnabled();
 			long[] pattern = { 0, 500, 1000 }; //TODO add better pattern
 			vibrator.vibrate(pattern, 0);
@@ -143,15 +140,6 @@ public class RingActivity extends WearableActivity implements SensorEventListene
 		wakeLock.release();
 		finish();
 	}
-
-	private void animateClock() {
-		//ObjectAnimator rotateAnimation = ObjectAnimator.ofFloat(clock, "rotation", 0f, 20f, 0f, -20f, 0f);
-		//rotateAnimation.setRepeatCount(ValueAnimator.INFINITE);
-		//rotateAnimation.setDuration(800);
-		//rotateAnimation.start();
-	}
-
-
 
 
 	@Override

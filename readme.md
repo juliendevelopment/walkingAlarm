@@ -18,12 +18,16 @@ for wear os.
 * [endless service](https://robertohuertas.com/2019/06/29/android_foreground_services/)
 
 
+## tool 
+
+* [android icon ](https://romannurik.github.io/AndroidAssetStudio/)
+
 
 ## step
 [x] redo the app for wear os simple alarm
 [x] add the system of stop when you walk
-[] fix bug possible to interupt alarm 
+[x] fix bug possible to interupt alarm 
 
 ## status
 
-
+Version V1.0 functional but ugly 

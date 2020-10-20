@@ -1,6 +1,5 @@
 package be.arte.walkingalarm.broadcastreceiver;
 
-import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -20,16 +19,5 @@ public class ScreenOffReveiver extends BroadcastReceiver {
 		Log.d("ScreenOffReveiver", "onReceive");
 		Intent intent1 = ringActivity.getIntent();
 		context.startActivity(intent1);
-
-		////Intent i = new Intent(context, RingActivity.class);
-		////context.startActivity(i);
-		//
-		//for (ActivityManager.AppTask appTask : ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE)).getAppTasks()) {
-		//	appTask.getTaskInfo().baseIntent.
-		//	if (appTask.getClass().equals(RingActivity.class)) {
-		//		appTask.finishAndRemoveTask();
-		//	}
-		//}
-		//((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE)).moveTaskToFront(ringActivity, 0);
 	}
 }

@@ -6,7 +6,7 @@
 		android:layout_height="match_parent"
 		android:background="@color/dark_grey"
 		android:padding="@dimen/box_inset_layout_padding"
-		tools:context=".MainActivity"
+		tools:context=".RingActivity"
 		tools:deviceIds="wear">
 	
 	<FrameLayout
@@ -14,69 +14,32 @@
 			android:layout_height="match_parent"
 			android:padding="@dimen/inner_frame_layout_padding"
 			app:boxedEdges="all">
+	
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			>
 		
-		<androidx.core.widget.NestedScrollView
+		
+		<TextView
+				android:id="@+id/textView3"
 				android:layout_width="match_parent"
-				android:layout_height="match_parent">
-			
-			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-					android:layout_width="match_parent"
-					android:layout_height="match_parent"
-					android:orientation="vertical">
-				
-				<TextView
-						android:id="@+id/textView"
-						android:gravity="top"
-						android:layout_width="1dp"
-						android:layout_height="wrap_content"
-						android:text="Ring Ring"
-						android:textAlignment="center"
-						android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-						app:layout_constraintEnd_toEndOf="parent"
-						app:layout_constraintStart_toStartOf="parent"
-						app:layout_constraintTop_toTopOf="parent" />
-				
-				<!--    <ImageView-->
-				<!--        android:id="@+id/activity_ring_clock"-->
-				<!--        android:layout_width="300dp"-->
-				<!--        android:layout_height="300dp"-->
-				<!--        app:layout_constraintBottom_toTopOf="@+id/activity_ring_dismiss"-->
-				<!--        app:layout_constraintEnd_toEndOf="parent"-->
-				<!--        app:layout_constraintStart_toStartOf="parent"-->
-				<!--        app:layout_constraintTop_toBottomOf="@+id/textView"-->
-				<!--        app:srcCompat="@drawable/ic_alarm_black_24dp"-->
-				<!--        />-->
-				
-				<Button
-						android:id="@+id/activity_ring_dismiss"
-						android:layout_width="0dp"
-						android:layout_height="wrap_content"
-						android:text="Dismiss"
-						android:gravity="bottom"
-						app:layout_constraintEnd_toEndOf="parent"
-						app:layout_constraintStart_toStartOf="parent"
-						tools:layout_editor_absoluteY="99dp" />
-				
-				<TextView
-						android:id="@+id/activity_ring_step"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:text="TextView"
-						android:gravity="center"
-						tools:layout_editor_absoluteX="108dp"
-						tools:layout_editor_absoluteY="49dp" />
-				
-				<TextView
-						android:id="@+id/textView3"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:text="Steps : "
-						android:gravity="center"
-						tools:layout_editor_absoluteX="37dp"
-						tools:layout_editor_absoluteY="49dp" />
-			
-			</LinearLayout>
-		</androidx.core.widget.NestedScrollView>
+				android:layout_height="wrap_content"
+				android:text="Steps : " />
+		
+		<TextView
+				android:id="@+id/activity_ring_step"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="TextView" />
+		
+		<Button
+				android:id="@+id/activity_ring_dismiss"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/Dismiss" />
+	</LinearLayout>
 	
 	</FrameLayout>
 </androidx.wear.widget.BoxInsetLayout>
