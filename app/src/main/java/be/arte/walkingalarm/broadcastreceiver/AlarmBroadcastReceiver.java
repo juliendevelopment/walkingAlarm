@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
+import be.arte.walkingalarm.RingActivity;
 import be.arte.walkingalarm.service.AlarmService;
 import be.arte.walkingalarm.service.RescheduleAlarmsService;
 
@@ -32,6 +33,7 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
     }
 
 	private void startAlarmService(Context context, Intent intent) {
+
 		Intent intentService = new Intent(context, AlarmService.class);
 		intentService.putExtra(TITLE, intent.getStringExtra(TITLE));
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

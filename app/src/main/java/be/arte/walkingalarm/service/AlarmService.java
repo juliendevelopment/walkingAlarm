@@ -51,17 +51,23 @@ public class AlarmService extends Service {
 		//wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,this.getPackageName());
 		//wakeLock.acquire();
 
-		vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+		//vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
+		Intent alarmIntent = new Intent(this, RingActivity.class);
+		alarmIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(alarmIntent);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 		Log.i("AlarmService","onStartCommand()" );
-        Intent notificationIntent = new Intent(this, RingActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
-        String alarmTitle = String.format("%s Alarm", intent.getStringExtra(AlarmBroadcastReceiver.TITLE));
+		Intent alarmIntent = new Intent(this, RingActivity.class);
+		alarmIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(alarmIntent);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, alarmIntent, 0);
+
+        String alarmTitle = String.format("%s Alarm", "the");
 
         Notification notification = new NotificationCompat.Builder(this, App.CHANNEL_ID)
                 .setContentTitle(alarmTitle)
@@ -75,25 +81,25 @@ public class AlarmService extends Service {
         startForeground(1, notification);
 
 
-		int timeout = 15 * 60 * 1000; // 15 min
-		getLock(getApplicationContext()).acquire(timeout);
-
-
-		long[] pattern = { 0, 500, 1000 }; //TODO add better pattern
-		vibrator.vibrate(pattern, 0);
+		//int timeout = 15 * 60 * 1000; // 15 min
+		//getLock(getApplicationContext()).acquire(timeout);
+		//
+		//
+		//long[] pattern = { 0, 500, 1000 }; //TODO add better pattern
+		//vibrator.vibrate(pattern, 0);
 
         return START_STICKY;
     }
-
-    @Override
-    public void onDestroy() {
-		Log.i("AlarmService","onDestroy()" );
-        super.onDestroy();
-        //wakeLock.release();
-		getLock(getApplicationContext()).release();
-        //mediaPlayer.stop();
-        vibrator.cancel();
-    }
+	//
+    //@Override
+    //public void onDestroy() {
+	//	Log.i("AlarmService","onDestroy()" );
+    //    super.onDestroy();
+    //    //wakeLock.release();
+	//	getLock(getApplicationContext()).release();
+    //    //mediaPlayer.stop();
+    //    vibrator.cancel();
+    //}
 
     @Nullable
     @Override

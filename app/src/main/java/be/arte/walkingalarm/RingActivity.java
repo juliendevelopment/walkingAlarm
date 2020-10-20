@@ -1,23 +1,29 @@
 package be.arte.walkingalarm;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.os.Vibrator;
+import android.support.wearable.activity.WearableActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import be.arte.walkingalarm.broadcastreceiver.ScreenOffReveiver;
 import be.arte.walkingalarm.service.AlarmService;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RingActivity extends AppCompatActivity implements SensorEventListener {
+public class RingActivity extends WearableActivity implements SensorEventListener{
 	@BindView(R.id.activity_ring_dismiss)
 	Button dismiss;
 	//@BindView(R.id.activity_ring_clock) ImageView clock;
@@ -30,31 +36,111 @@ public class RingActivity extends AppCompatActivity implements SensorEventListen
 	private int currentStep;
 	private final int MAX_STEP = 20;
 
+	private boolean isDismissed = false;
+
+	private Vibrator vibrator;
+
+
+	PowerManager.WakeLock wakeLock;
+
+	ScreenOffReveiver screenOffReveiver;
+
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
+		Log.d("RingActivity", "onCreate()");
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ring_activity_2);
 
 		sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		sensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
+		sensorManager.registerListener(this, sensor, Sensor.TYPE_STEP_COUNTER);
+
+		vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
 		ButterKnife.bind(this);
 
-		dismiss.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-
-				Toast.makeText(getApplicationContext(), "walk lazy !!! ", Toast.LENGTH_LONG).show();
-				//dismissAlarm();
-			}
+		dismiss.setOnClickListener(v -> {
+			Toast.makeText(getApplicationContext(), "walk lazy !!! ", Toast.LENGTH_LONG).show();
+			//dismissAlarm();
 		});
 
-		animateClock();
+
+		PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+		wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, this.getClass().getCanonicalName());
+		wakeLock.acquire();
+
+		screenOffReveiver = new ScreenOffReveiver(this);
+		registerReceiver(screenOffReveiver, new IntentFilter(Intent.ACTION_SCREEN_OFF));
 	}
 
+	@Override
+	protected void onResume() {
+		Log.d("RingActivity", "onResume()");
+		super.onResume();
+
+		if(!isDismissed){
+			Log.d("RingActivity", "onResume");
+			animateClock();
+			setAmbientEnabled();
+			long[] pattern = { 0, 500, 1000 }; //TODO add better pattern
+			vibrator.vibrate(pattern, 0);
+		}
+	}
+
+	@Override
+	protected void onUserLeaveHint() {
+		Log.d("RingActivity", "onUserLeaveHint()");
+
+		//if(!isDismissed){
+		//	Log.d("RingActivity", "Preventing leaving");
+		//	startActivity(this.getIntent());
+		//}
+	}
+
+	@Override
+	protected void onPause(){
+		super.onPause();
+		Log.d("RingActivity", "onPause()");
+
+		//if(!isDismissed){
+		//	Log.d("RingActivity", "Preventing leaving");
+		//	startActivity(this.getIntent());
+		//}
+	}
+
+	@Override
+	protected void onStop(){
+		super.onStop();
+		Log.d("RingActivity", "onStop()");
+
+		//if(!isDismissed){
+		//	Log.d("RingActivity", "Preventing leaving");
+		//	startActivity(this.getIntent());
+		//}
+	}
+
+	@Override
+	protected void onDestroy() {
+		Log.d("RingActivity", "onDestroy()");
+		super.onDestroy();
+
+		//if(!isDismissed){
+		//	Log.d("RingActivity", "Preventing leaving");
+		//	startActivity(this.getIntent());
+		//}
+	}
+
+
 	private void dismissAlarm() {
+		Log.d("RingActivity", "dismissAlarm()");
+		isDismissed = true;
 		Intent intentService = new Intent(getApplicationContext(), AlarmService.class);
 		getApplicationContext().stopService(intentService);
+		vibrator.cancel();
+		unregisterReceiver(screenOffReveiver);
+		sensorManager.unregisterListener(this);
+		wakeLock.release();
 		finish();
 	}
 
@@ -65,21 +151,11 @@ public class RingActivity extends AppCompatActivity implements SensorEventListen
 		//rotateAnimation.start();
 	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		sensorManager.registerListener(this, sensor, Sensor.TYPE_STEP_COUNTER);
-	}
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-		sensorManager.unregisterListener(this);
-	}
+
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
-
 		float[] values = event.values;
 		int value = -1;
 

@@ -68,6 +68,7 @@ public class Alarm {
     public void schedule(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
+        //Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
         Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
 
         PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);

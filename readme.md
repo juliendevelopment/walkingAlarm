@@ -6,25 +6,23 @@ for wear os.
 
 ## inspiration :
 
-[article](https://learntodroid.com/how-to-create-a-simple-alarm-clock-app-in-android/)
-[github repo](https://github.com/learntodroid/SimpleAlarmClock)
+* [article](https://learntodroid.com/how-to-create-a-simple-alarm-clock-app-in-android/)
+* [github repo](https://github.com/learntodroid/SimpleAlarmClock)
+* [otther example](https://www.journaldev.com/27681/android-alarmmanager-broadcast-receiver-and-service)
+* [smart alarm](https://github.com/fridgecow/smartalarm.git)
 
-[otther example](https://www.journaldev.com/27681/android-alarmmanager-broadcast-receiver-and-service)
-
-
-[endless service](https://robertohuertas.com/2019/06/29/android_foreground_services/)
 ## doc 
 
-[sensor](https://developer.android.com/guide/topics/sensors/sensors_motion.html#java)
-
-
+* [sensor](https://developer.android.com/guide/topics/sensors/sensors_motion.html#java)
+* [info to keep activity working](https://stackoverflow.com/questions/22168287/prevent-activity-from-being-destroyed-as-long-as-possible)
+* [endless service](https://robertohuertas.com/2019/06/29/android_foreground_services/)
 
 
 
 ## step
-[] redo the app for wear os simple alarm
-[] add the system of stop when you walk
-[]
+[x] redo the app for wear os simple alarm
+[x] add the system of stop when you walk
+[] fix bug possible to interupt alarm 
 
 ## status
 
