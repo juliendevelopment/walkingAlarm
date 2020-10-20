@@ -27,6 +27,7 @@ for wear os.
 [x] redo the app for wear os simple alarm
 [x] add the system of stop when you walk
 [x] fix bug possible to interupt alarm 
+[] reset the alarm on a restart  
 
 ## status
 
