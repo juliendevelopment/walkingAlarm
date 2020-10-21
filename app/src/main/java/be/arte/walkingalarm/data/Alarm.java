@@ -67,11 +67,8 @@ public class Alarm {
 
     public void schedule(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-
-        //Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
         Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
-
-        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
@@ -105,11 +102,10 @@ public class Alarm {
     }
 
     public void cancelAlarm(Context context) {
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
-        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0);
-        alarmManager.cancel(alarmPendingIntent);
-        this.enable = false;
+		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+		Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
+		PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0);
+		alarmManager.cancel(alarmPendingIntent);
 
         String toastText = String.format("Alarm cancelled for %02d:%02d with id %d", hour, minute, alarmId);
         Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();

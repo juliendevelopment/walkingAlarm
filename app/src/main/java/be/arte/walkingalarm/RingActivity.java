@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import be.arte.walkingalarm.broadcastreceiver.ScreenOffReveiver;
-import be.arte.walkingalarm.service.AlarmService;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -132,8 +131,6 @@ public class RingActivity extends WearableActivity implements SensorEventListene
 	private void dismissAlarm() {
 		Log.d("RingActivity", "dismissAlarm()");
 		isDismissed = true;
-		Intent intentService = new Intent(getApplicationContext(), AlarmService.class);
-		getApplicationContext().stopService(intentService);
 		vibrator.cancel();
 		unregisterReceiver(screenOffReveiver);
 		sensorManager.unregisterListener(this);

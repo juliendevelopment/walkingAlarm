@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
 			updateAlarm();
 			if (theAlarm.isEnable()) {
 				theAlarm.schedule(getApplicationContext());
+			}else{
+				theAlarm.cancelAlarm(getApplicationContext());
 			}
 		});
 
