@@ -1,8 +1,11 @@
 package be.arte.walkingalarm;
 
+import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,8 +17,8 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-	@BindView(R.id.main_timePicker)
-	TimePicker timePicker;
+	@BindView(R.id.main_time_display)
+	TextView time;
 	@BindView(R.id.main_schedule_alarm)
 	Button scheduleAlarm;
 	@BindView(R.id.main_on_off_switch)
@@ -23,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
 
 	Alarm theAlarm;
 	private CreateAlarmViewModel createAlarmViewModel;
+
+	private int hour;
+	private int minute;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +52,29 @@ public class MainActivity extends AppCompatActivity {
 		}
 
 		enableSwitch.setChecked(theAlarm.isEnable());
-		timePicker.setHour(theAlarm.getHour());
-		timePicker.setMinute(theAlarm.getMinute());
+		hour = theAlarm.getHour();
+		minute = theAlarm.getMinute();
+		time.setText(hour+" : "+minute);
+
+		time.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				TimePickerDialog mTimePicker;
+				mTimePicker = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
+					@Override
+					public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+						hour = selectedHour;
+						minute = selectedMinute;
+						time.setText(hour+" : "+minute);
+					}
+				}, hour, minute, true);//Yes 24 hour time
+				mTimePicker.setTitle("Select Time");
+				mTimePicker.show();
+			}
+		});
 
 		scheduleAlarm.setOnClickListener(v -> {
 			updateAlarm();
@@ -61,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void updateAlarm() {
-		theAlarm.setHour(TimePickerUtil.getTimePickerHour(timePicker));
-		theAlarm.setMinute(TimePickerUtil.getTimePickerMinute(timePicker));
+		theAlarm.setHour(hour);
+		theAlarm.setMinute(minute);
 		theAlarm.setEnable(enableSwitch.isChecked());
 		createAlarmViewModel.update(theAlarm);
 	}
