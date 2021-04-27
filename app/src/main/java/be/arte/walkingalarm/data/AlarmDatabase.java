@@ -16,7 +16,7 @@ public abstract class AlarmDatabase extends RoomDatabase {
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    static AlarmDatabase getDatabase(final Context context) {
+    public static AlarmDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (AlarmDatabase.class) {
                 if (INSTANCE == null) {

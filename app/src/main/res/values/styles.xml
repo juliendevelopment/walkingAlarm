@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="DialogTheme">
+		<item name="android:windowBackground">#333</item>
+<!--		<item name="colorAccent">#2BF</item>-->
+	</style>
+</resources>
