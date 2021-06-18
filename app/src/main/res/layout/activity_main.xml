@@ -20,9 +20,10 @@
 				android:layout_height="match_parent">
 			
 			<LinearLayout
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:orientation="vertical">
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:orientation="vertical"
+					>
 				
 				<TextView
 						android:id="@+id/main_time_display"
@@ -30,7 +31,8 @@
 						android:layout_height="48dp"
 						android:layout_weight="1"
 						android:text="@string/main_time"
-						android:textAlignment="center" />
+						android:textAlignment="center"
+						android:textSize="40sp" />
 				
 				<Switch
 						android:id="@+id/main_on_off_switch"
@@ -42,11 +44,13 @@
 				
 				<Button
 						android:id="@+id/main_schedule_alarm"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
 						android:layout_weight="1"
 						android:gravity="bottom"
-						android:text="@string/schedule_alarm" />
+						android:text="@string/schedule_alarm"
+						android:textSize="10sp"
+						android:textColor="@color/dark_red"/>
 			
 			</LinearLayout>
 		</androidx.core.widget.NestedScrollView>

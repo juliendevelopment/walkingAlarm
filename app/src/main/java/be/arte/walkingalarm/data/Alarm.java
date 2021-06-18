@@ -65,52 +65,7 @@ public class Alarm {
         return created;
     }
 
-    public void schedule(Context context) {
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
-        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, minute);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-
-        // if alarm time has already passed, increment day by 1
-        if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
-            calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) + 1);
-        }
-
-
-        String toastText = null;
-        try {
-            toastText = String.format("Alarm scheduled for %s at %02d:%02d", DayUtil.toDay(calendar.get(Calendar.DAY_OF_WEEK)), hour, minute, alarmId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        alarmManager.setExact(
-                AlarmManager.RTC_WAKEUP,
-                calendar.getTimeInMillis(),
-                alarmPendingIntent
-        );
-
-		Log.i("Alarm", "schedule");
-		Toast.makeText(context, toastText, Toast.LENGTH_LONG).show();
-    }
-
-    public void cancelAlarm(Context context) {
-		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-		Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
-		PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0);
-		alarmManager.cancel(alarmPendingIntent);
-
-        String toastText = String.format("Alarm cancelled for %02d:%02d with id %d", hour, minute, alarmId);
-        Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
-        Log.i("Alarm", toastText);
-    }
 
 	@Override
 	public String toString() {

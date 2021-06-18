@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import be.arte.walkingalarm.createalarm.CreateAlarmViewModel;
 import be.arte.walkingalarm.createalarm.TimePickerUtil;
 import be.arte.walkingalarm.data.Alarm;
+import be.arte.walkingalarm.service.AlarmService;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
 	private int hour;
 	private int minute;
+
+	private AlarmService alarmService = new AlarmService();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,32 +59,23 @@ public class MainActivity extends AppCompatActivity {
 		minute = theAlarm.getMinute();
 		time.setText(hour+" : "+minute);
 
-		time.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-
-				TimePickerDialog mTimePicker;
-				mTimePicker = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
-					@Override
-					public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-						hour = selectedHour;
-						minute = selectedMinute;
-						time.setText(hour+" : "+minute);
-					}
-				}, hour, minute, true);//Yes 24 hour time
-				mTimePicker.setTitle("Select Time");
-				mTimePicker.show();
-			}
+		time.setOnClickListener(v -> {
+			TimePickerDialog mTimePicker;
+			mTimePicker = new TimePickerDialog(MainActivity.this, (timePicker, selectedHour, selectedMinute) -> {
+				hour = selectedHour;
+				minute = selectedMinute;
+				time.setText(hour+" : "+minute);
+			}, hour, minute, true);//Yes 24 hour time
+			mTimePicker.setTitle("Select Time");
+			mTimePicker.show();
 		});
 
 		scheduleAlarm.setOnClickListener(v -> {
 			updateAlarm();
 			if (theAlarm.isEnable()) {
-				theAlarm.schedule(getApplicationContext());
+				alarmService.schedule(getApplicationContext(), theAlarm);
 			}else{
-				theAlarm.cancelAlarm(getApplicationContext());
+				alarmService.cancelAlarm(getApplicationContext(), theAlarm);
 			}
 		});
 
