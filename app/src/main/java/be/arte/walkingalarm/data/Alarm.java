@@ -23,29 +23,32 @@ public class Alarm {
     private int hour, minute;
     private boolean enable;
 
+    private int steps;
+
     private long created;
 
-    public Alarm(int alarmId, int hour, int minute, long created, boolean enable) {
-        this.alarmId = alarmId;
-        this.hour = hour;
-        this.minute = minute;
-        this.enable = enable;
-        this.created = created;
-    }
+	public Alarm(int alarmId, int hour, int minute, boolean enable, int steps, long created) {
+		this.alarmId = alarmId;
+		this.hour = hour;
+		this.minute = minute;
+		this.enable = enable;
+		this.steps = steps;
+		this.created = created;
+	}
 
 	public void setHour(int hour) {
-		this.hour = hour;
-	}
+        this.hour = hour;
+    }
 
-	public void setMinute(int minute) {
-		this.minute = minute;
-	}
+    public void setMinute(int minute) {
+        this.minute = minute;
+    }
 
-	public void setEnable(boolean enable) {
-		this.enable = enable;
-	}
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
 
-	public int getAlarmId() {
+    public int getAlarmId() {
         return alarmId;
     }
 
@@ -65,7 +68,15 @@ public class Alarm {
         return created;
     }
 
-    public void schedule(Context context) {
+	public int getSteps() {
+		return steps;
+	}
+
+	public void setSteps(int steps) {
+		this.steps = steps;
+	}
+
+	public void schedule(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
         PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0);
@@ -97,29 +108,29 @@ public class Alarm {
                 alarmPendingIntent
         );
 
-		Log.i("Alarm", "schedule");
-		Toast.makeText(context, toastText, Toast.LENGTH_LONG).show();
+        Log.i("Alarm", "schedule");
+        Toast.makeText(context, toastText, Toast.LENGTH_LONG).show();
     }
 
     public void cancelAlarm(Context context) {
-		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-		Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
-		PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0);
-		alarmManager.cancel(alarmPendingIntent);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
+        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0);
+        alarmManager.cancel(alarmPendingIntent);
 
         String toastText = String.format("Alarm cancelled for %02d:%02d with id %d", hour, minute, alarmId);
         Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
         Log.i("Alarm", toastText);
     }
 
-	@Override
-	public String toString() {
-		return "Alarm{" +
-			   "alarmId=" + alarmId +
-			   ", hour=" + hour +
-			   ", minute=" + minute +
-			   ", enable=" + enable +
-			   ", created=" + created +
-			   '}';
-	}
+    @Override
+    public String toString() {
+        return "Alarm{" +
+               "alarmId=" + alarmId +
+               ", hour=" + hour +
+               ", minute=" + minute +
+               ", enable=" + enable +
+               ", created=" + created +
+               '}';
+    }
 }

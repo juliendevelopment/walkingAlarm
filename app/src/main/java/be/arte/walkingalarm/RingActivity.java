@@ -16,11 +16,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import be.arte.walkingalarm.broadcastreceiver.ScreenOffReveiver;
+import be.arte.walkingalarm.createalarm.CreateAlarmViewModel;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RingActivity extends WearableActivity implements SensorEventListener{
+public class RingActivity extends AppCompatActivity implements SensorEventListener{
 	@BindView(R.id.activity_ring_dismiss)
 	Button dismiss;
 	//@BindView(R.id.activity_ring_clock) ImageView clock;
@@ -31,7 +34,7 @@ public class RingActivity extends WearableActivity implements SensorEventListene
 	private Sensor sensor;
 
 	private int currentStep;
-	private final int MAX_STEP = 20;
+	private int steps;
 
 	private boolean isDismissed = false;
 
@@ -41,6 +44,9 @@ public class RingActivity extends WearableActivity implements SensorEventListene
 	PowerManager.WakeLock wakeLock;
 
 	ScreenOffReveiver screenOffReveiver;
+
+	private CreateAlarmViewModel createAlarmViewModel;
+
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,6 +69,9 @@ public class RingActivity extends WearableActivity implements SensorEventListene
 		});
 
 
+		this.createAlarmViewModel = new ViewModelProvider(this).get(CreateAlarmViewModel.class);
+		steps = createAlarmViewModel.getTheAlarm().getSteps();
+
 		PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 		wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, this.getClass().getCanonicalName());
 		wakeLock.acquire();
@@ -78,7 +87,6 @@ public class RingActivity extends WearableActivity implements SensorEventListene
 
 		if(!isDismissed){
 			Log.d("RingActivity", "onResume");
-			setAmbientEnabled();
 			long[] pattern = { 0, 500, 1000 }; //TODO add better pattern
 			vibrator.vibrate(pattern, 0);
 		}
@@ -149,9 +157,9 @@ public class RingActivity extends WearableActivity implements SensorEventListene
 			currentStep += value;
 		}
 		// For test only. Only allowed value is 1.0 i.e. for step taken
-		stepsDisplay.setText(currentStep + " / " + MAX_STEP);
+		stepsDisplay.setText(currentStep + " / " + steps);
 
-		if (currentStep > MAX_STEP) {
+		if (currentStep > steps) {
 			dismissAlarm();
 		}
 	}

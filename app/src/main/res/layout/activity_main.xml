@@ -30,7 +30,8 @@
 						android:layout_height="48dp"
 						android:layout_weight="1"
 						android:text="@string/main_time"
-						android:textAlignment="center" />
+						android:textAlignment="center"
+						android:textSize="20sp" />
 				
 				<Switch
 						android:id="@+id/main_on_off_switch"
@@ -47,6 +48,15 @@
 						android:layout_weight="1"
 						android:gravity="bottom"
 						android:text="@string/schedule_alarm" />
+				
+				<EditText
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:inputType="number"
+						android:text="10"
+						android:ems="10"
+						android:id="@+id/main_steps"
+						android:layout_weight="1" />
 			
 			</LinearLayout>
 		</androidx.core.widget.NestedScrollView>
