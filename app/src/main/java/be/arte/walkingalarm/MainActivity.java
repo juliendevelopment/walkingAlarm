@@ -1,9 +1,11 @@
 package be.arte.walkingalarm;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -24,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 	Button scheduleAlarm;
 	@BindView(R.id.main_on_off_switch)
 	Switch enableSwitch;
+	@BindView(R.id.main_number_of_step)
+	EditText numberOfStep;
 
 	Alarm theAlarm;
 	private CreateAlarmViewModel createAlarmViewModel;
@@ -51,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
 					System.currentTimeMillis(),
 					false
 			);
+			theAlarm.setNumberOfStep(50);
 			createAlarmViewModel.insert(theAlarm);
 		}
 
@@ -79,12 +84,18 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 
+
+		//FIXME TEST
+		//Intent alarmIntent = new Intent(this, RingActivity.class);
+		//alarmIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		//startActivity(alarmIntent);
 	}
 
 	private void updateAlarm() {
 		theAlarm.setHour(hour);
 		theAlarm.setMinute(minute);
 		theAlarm.setEnable(enableSwitch.isChecked());
+		theAlarm.setNumberOfStep(Integer.parseInt(numberOfStep.getText().toString()));
 		createAlarmViewModel.update(theAlarm);
 	}
 }

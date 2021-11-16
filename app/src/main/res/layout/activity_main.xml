@@ -34,6 +34,7 @@
 						android:textAlignment="center"
 						android:textSize="40sp" />
 				
+				
 				<Switch
 						android:id="@+id/main_on_off_switch"
 						android:layout_width="match_parent"
@@ -51,6 +52,16 @@
 						android:text="@string/schedule_alarm"
 						android:textSize="10sp"
 						android:textColor="@color/dark_red"/>
+				
+				
+				<EditText
+						android:id="@+id/main_number_of_step"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:ems="10"
+						android:inputType="number"
+						android:text="50" />
 			
 			</LinearLayout>
 		</androidx.core.widget.NestedScrollView>

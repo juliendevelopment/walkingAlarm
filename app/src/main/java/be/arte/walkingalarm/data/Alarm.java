@@ -23,6 +23,8 @@ public class Alarm {
     private int hour, minute;
     private boolean enable;
 
+    private  int numberOfStep;
+
     private long created;
 
     public Alarm(int alarmId, int hour, int minute, long created, boolean enable) {
@@ -57,7 +59,15 @@ public class Alarm {
         return minute;
     }
 
-    public boolean isEnable() {
+	public int getNumberOfStep() {
+		return numberOfStep;
+	}
+
+	public void setNumberOfStep(int numberOfStep) {
+		this.numberOfStep = numberOfStep;
+	}
+
+	public boolean isEnable() {
         return enable;
     }
 
