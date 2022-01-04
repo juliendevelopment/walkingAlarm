@@ -1,6 +1,14 @@
 package be.arte.walkingalarm.data;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.EnumSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -97,7 +105,9 @@ public class Alarm {
         String toastText = null;
         try {
             toastText = String.format("Alarm scheduled for %s at %02d:%02d", DayUtil.toDay(calendar.get(Calendar.DAY_OF_WEEK)), hour, minute, alarmId);
-        } catch (Exception e) {
+			toastText += "\n";
+			toastText += computeDiff(calendar.getTime(), new Date());
+		} catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -133,4 +143,35 @@ public class Alarm {
                ", created=" + created +
                '}';
     }
+
+	public static String computeDiff(Date date1, Date date2) {
+
+		long diffInMillies = date2.getTime() - date1.getTime();
+
+		//create the list
+		List<TimeUnit> units = new ArrayList<TimeUnit>(EnumSet.allOf(TimeUnit.class));
+		Collections.reverse(units);
+
+		//create the result map of TimeUnit and difference
+		Map<TimeUnit,Long> result = new LinkedHashMap<TimeUnit,Long>();
+		long milliesRest = diffInMillies;
+
+		for ( TimeUnit unit : units ) {
+
+			//calculate difference in millisecond
+			long diff = unit.convert(milliesRest, TimeUnit.MILLISECONDS);
+			long diffInMilliesForUnit = unit.toMillis(diff);
+			milliesRest = milliesRest - diffInMilliesForUnit;
+
+			//put the result in the map
+			result.put(unit,diff);
+		}
+
+		Long days = result.get(TimeUnit.DAYS);
+		Long hours = result.get(TimeUnit.HOURS);
+		Long minutes = result.get(TimeUnit.MINUTES);
+		Long seconds = result.get(TimeUnit.SECONDS);
+
+		return String.format("%d days %d:%d %ds", days, hours, minutes, seconds);
+	}
 }
