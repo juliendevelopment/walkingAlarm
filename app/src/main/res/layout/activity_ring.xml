@@ -9,44 +9,37 @@
 		tools:context=".RingActivity"
 		tools:deviceIds="wear">
 	
-	<FrameLayout
+	
+	<LinearLayout
+			android:orientation="vertical"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:padding="@dimen/inner_frame_layout_padding"
-			app:boxedEdges="all">
+			android:layout_margin="@dimen/screen_percentage_05"
+			>
 		
-		<androidx.core.widget.NestedScrollView
-				android:layout_width="match_parent"
-				android:layout_height="match_parent">
-			
-			<LinearLayout
+		<Button
+					app:layout_constraintBottom_toBottomOf="@id/activity_ring_step"
+					android:id="@+id/activity_ring_dismiss"
 					android:layout_width="match_parent"
-					android:layout_height="match_parent"
-					android:orientation="vertical">
-				
-				<TextView
-						android:id="@+id/textView3"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:text="Steps : "
-						android:textSize="20sp" />
-				
-				<TextView
-						android:id="@+id/activity_ring_step"
-						android:layout_width="match_parent"
-						android:layout_height="match_parent"
-						android:text="TextView"
-						android:textSize="40sp"
-						android:textColor="@color/red_a200"/>
-				
-				
-				<Button
-						android:id="@+id/activity_ring_dismiss"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:text="@string/Dismiss" />
-			</LinearLayout>
-		</androidx.core.widget.NestedScrollView>
+					android:layout_height="wrap_content"
+					android:text="@string/Dismiss" />
+		
+		<TextView
+				android:id="@+id/activity_ring_step_label"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Steps : "
+				android:textSize="20sp" />
+		
+		<TextView
+					android:id="@+id/activity_ring_step"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="TextView"
+					android:textSize="40sp"
+					android:textColor="@color/red_a200" />
 	
-	</FrameLayout>
+	</LinearLayout>
+
+
 </androidx.wear.widget.BoxInsetLayout>

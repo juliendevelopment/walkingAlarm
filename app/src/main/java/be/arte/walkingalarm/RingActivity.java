@@ -15,6 +15,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.activity.ComponentActivity;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,7 +24,7 @@ import be.arte.walkingalarm.createalarm.CreateAlarmViewModel;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RingActivity extends AppCompatActivity implements SensorEventListener{
+public class RingActivity extends ComponentActivity implements SensorEventListener{
 	@BindView(R.id.activity_ring_dismiss)
 	Button dismiss;
 	//@BindView(R.id.activity_ring_clock) ImageView clock;
@@ -55,13 +56,16 @@ public class RingActivity extends AppCompatActivity implements SensorEventListen
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ring);
 
+		ButterKnife.bind(this);
+
+		stepsDisplay.setText("move !!!!");
+
 		sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		sensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
 		sensorManager.registerListener(this, sensor, Sensor.TYPE_STEP_COUNTER);
 
 		vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
-		ButterKnife.bind(this);
 
 		dismiss.setOnClickListener(v -> {
 			Toast.makeText(getApplicationContext(), "walk lazy !!! ", Toast.LENGTH_LONG).show();
