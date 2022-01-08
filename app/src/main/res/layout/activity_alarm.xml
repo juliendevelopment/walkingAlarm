@@ -19,40 +19,40 @@
 			>
 		
 		<TextView
-				android:id="@+id/main_time_display"
+				android:id="@+id/alarm_time_display"
 				android:layout_width="60dp"
 				android:layout_height="60dp"
 				android:text="@string/main_time"
 				android:textAlignment="center"
 				android:textSize="34sp"
 				android:textColor="@color/red_a200"
-				app:layout_constraintEnd_toEndOf="@+id/main_on_off_switch"
-				app:layout_constraintBottom_toTopOf="@+id/main_on_off_switch"
+				app:layout_constraintEnd_toEndOf="@+id/alarm_on_off_switch"
+				app:layout_constraintBottom_toTopOf="@+id/alarm_on_off_switch"
 				app:layout_constraintTop_toTopOf="parent"
 				app:layout_constraintStart_toStartOf="parent"
 				
 				/>
 		
 		<Switch
-				android:id="@+id/main_on_off_switch"
+				android:id="@+id/alarm_on_off_switch"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center"
 				android:text="@string/on_off"
-				app:layout_constraintTop_toBottomOf="@+id/main_time_display"
-				app:layout_constraintEnd_toEndOf="@+id/main_schedule_alarm"
-				app:layout_constraintBottom_toTopOf="@+id/main_schedule_alarm"
+				app:layout_constraintTop_toBottomOf="@+id/alarm_time_display"
+				app:layout_constraintEnd_toEndOf="@+id/alarm_schedule_alarm"
+				app:layout_constraintBottom_toTopOf="@+id/alarm_schedule_alarm"
 				app:layout_constraintStart_toStartOf="parent" />
 		
 		<Button
-				android:id="@+id/main_schedule_alarm"
+				android:id="@+id/alarm_schedule_alarm"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="bottom"
 				android:text="@string/schedule_alarm"
 				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toBottomOf="@+id/main_on_off_switch"
-				app:layout_constraintBottom_toTopOf="@+id/main_steps" />
+				app:layout_constraintTop_toBottomOf="@+id/alarm_on_off_switch"
+				app:layout_constraintBottom_toTopOf="@+id/alarm_steps" />
 		
 		<EditText
 				android:layout_width="wrap_content"
@@ -60,9 +60,9 @@
 				android:inputType="number"
 				android:text="10"
 				android:ems="10"
-				android:id="@+id/main_steps"
-				app:layout_constraintTop_toBottomOf="@+id/main_schedule_alarm"
-				app:layout_constraintEnd_toEndOf="@+id/main_schedule_alarm"
+				android:id="@+id/alarm_steps"
+				app:layout_constraintTop_toBottomOf="@+id/alarm_schedule_alarm"
+				app:layout_constraintEnd_toEndOf="@+id/alarm_schedule_alarm"
 				app:layout_constraintStart_toStartOf="parent"
 				app:layout_constraintBottom_toBottomOf="parent" />
 	

@@ -9,4 +9,6 @@
 	<string name="schedule_alarm">schedule alarm</string>
 	<string name="Dismiss">Dismiss</string>
 	<string name="main_time">time</string>
+	<string name="alarm">Alarm</string>
+	<string name="nap">Nap</string>
 </resources>
