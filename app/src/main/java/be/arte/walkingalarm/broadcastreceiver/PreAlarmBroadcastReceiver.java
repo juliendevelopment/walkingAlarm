@@ -24,12 +24,6 @@ public class PreAlarmBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 		Log.i("TAG", "onReceive receiver");
 
-		AlarmDatabase db = AlarmDatabase.getDatabase(context);
-		AlarmDao alarmDao = db.alarmDao();
-		Alarm theAlarm = alarmDao.getTheAlarm();
-		if (theAlarm.isEnable()) {
-			theAlarm.schedule(context);
-		}
 
 		Toast.makeText(context, "onReceive receiver", Toast.LENGTH_LONG).show();
 		String toastText = String.format("pre Alarm Received");

@@ -25,7 +25,8 @@ import be.arte.walkingalarm.createalarm.DayUtil;
 
 @Entity(tableName = "alarm_table")
 public class Alarm {
-    @PrimaryKey
+	private static final int PRE_ALARM_MINUTE_DELTA = 10;
+	@PrimaryKey
     @NonNull
     private int alarmId;
 
@@ -141,17 +142,8 @@ public class Alarm {
 
 	@NonNull
 	private Calendar createCalandarPreAlarm() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTimeInMillis(System.currentTimeMillis());
-		calendar.set(Calendar.HOUR_OF_DAY, hour);
-		calendar.set(Calendar.MINUTE, minute - 10);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MILLISECOND, 0);
-
-		// if alarm time has already passed, increment day by 1
-		if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
-			calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) + 1);
-		}
+		Calendar calendar = createCalandarAlarm();
+		calendar.set(Calendar.MINUTE, minute - PRE_ALARM_MINUTE_DELTA);
 		return calendar;
 	}
 

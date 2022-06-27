@@ -85,6 +85,7 @@ public class AlarmActivity extends ComponentActivity {
 			updateAlarm();
 			if (theAlarm.isEnable()) {
 				theAlarm.schedulePreAlarm(getApplicationContext());
+				theAlarm.schedule(getApplicationContext());
 			}else{
 				theAlarm.cancelAlarm(getApplicationContext());
 			}
