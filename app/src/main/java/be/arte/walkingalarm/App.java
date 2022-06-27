@@ -7,6 +7,7 @@ import android.os.Build;
 
 public class App extends Application {
     public static final String CHANNEL_ID = "ALARM_SERVICE_CHANNEL";
+    public static final String CHANNEL_ID_2 = "ALARM_SERVICE_CHANNEL_2";
 
     @Override
     public void onCreate() {

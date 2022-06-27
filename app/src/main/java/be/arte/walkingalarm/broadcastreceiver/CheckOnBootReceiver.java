@@ -17,7 +17,7 @@ public class CheckOnBootReceiver extends BroadcastReceiver {
 		AlarmDao alarmDao = db.alarmDao();
 		Alarm theAlarm = alarmDao.getTheAlarm();
 		if (theAlarm.isEnable()) {
-			theAlarm.schedule(context);
+			theAlarm.schedulePreAlarm(context);
 		}
 	}
 }

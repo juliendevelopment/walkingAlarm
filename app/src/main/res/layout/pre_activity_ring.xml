@@ -6,7 +6,7 @@
 		android:layout_height="match_parent"
 		android:background="@color/dark_grey"
 		android:padding="@dimen/box_inset_layout_padding"
-		tools:context=".WalkingRingActivity"
+		tools:context=".PreRingActivity"
 		tools:deviceIds="wear">
 	
 	
@@ -19,7 +19,7 @@
 		
 		<Button
 					app:layout_constraintBottom_toBottomOf="@id/activity_ring_step"
-					android:id="@+id/activity_ring_dismiss"
+					android:id="@+id/activity_pre_ring_dismiss"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:text="@string/Dismiss" />
@@ -28,17 +28,8 @@
 				android:id="@+id/activity_ring_step_label"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:text="Steps : "
+				android:text="walking alarm in 10 min : "
 				android:textSize="20sp" />
-		
-		<TextView
-					android:id="@+id/activity_ring_step"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:text="TextView"
-					android:textSize="40sp"
-					android:textColor="@color/red_a200" />
-	
 	</LinearLayout>
 
 

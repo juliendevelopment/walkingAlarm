@@ -10,20 +10,32 @@ import android.util.Log;
 import android.widget.Toast;
 import androidx.core.app.NotificationCompat;
 import be.arte.walkingalarm.App;
+import be.arte.walkingalarm.PreRingActivity;
 import be.arte.walkingalarm.R;
 import be.arte.walkingalarm.WalkingRingActivity;
+import be.arte.walkingalarm.data.Alarm;
+import be.arte.walkingalarm.data.AlarmDao;
+import be.arte.walkingalarm.data.AlarmDatabase;
 
-public class AlarmBroadcastReceiver extends BroadcastReceiver {
+public class PreAlarmBroadcastReceiver extends BroadcastReceiver {
 
 
     @Override
     public void onReceive(Context context, Intent intent) {
 		Log.i("TAG", "onReceive receiver");
-		Toast.makeText(context, "onReceive receiver", Toast.LENGTH_LONG).show();
-            String toastText = String.format("Alarm Received");
-            Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
 
-		Intent alarmIntent = new Intent(context, WalkingRingActivity.class);
+		AlarmDatabase db = AlarmDatabase.getDatabase(context);
+		AlarmDao alarmDao = db.alarmDao();
+		Alarm theAlarm = alarmDao.getTheAlarm();
+		if (theAlarm.isEnable()) {
+			theAlarm.schedule(context);
+		}
+
+		Toast.makeText(context, "onReceive receiver", Toast.LENGTH_LONG).show();
+		String toastText = String.format("pre Alarm Received");
+		Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
+
+		Intent alarmIntent = new Intent(context, PreRingActivity.class);
 		alarmIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		context.startActivity(alarmIntent);
 
@@ -35,9 +47,9 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
 
 		String alarmTitle = String.format("%s Alarm", "the");
 
-		Notification notification = new NotificationCompat.Builder(context, App.CHANNEL_ID)
+		Notification notification = new NotificationCompat.Builder(context, App.CHANNEL_ID_2)
 				.setContentTitle(alarmTitle)
-				.setContentText("Ring Ring .. Ring Ring")
+				.setContentText("pre alarm")
 				.setSmallIcon(R.drawable.ic_alarm_black_24dp)
 				.setContentIntent(pendingIntent)
 				.build();

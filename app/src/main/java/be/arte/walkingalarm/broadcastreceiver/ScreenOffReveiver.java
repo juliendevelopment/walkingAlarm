@@ -4,13 +4,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import be.arte.walkingalarm.RingActivity;
+import androidx.activity.ComponentActivity;
+import be.arte.walkingalarm.WalkingRingActivity;
 
 public class ScreenOffReveiver extends BroadcastReceiver {
 
-	private RingActivity ringActivity;
+	private ComponentActivity ringActivity;
 
-	public ScreenOffReveiver(RingActivity ringActivity) {
+	public ScreenOffReveiver(ComponentActivity ringActivity) {
 		this.ringActivity = ringActivity;
 	}
 

@@ -26,7 +26,7 @@ public class AlarmActivity extends ComponentActivity {
 	@BindView(R.id.alarm_on_off_switch)
 	Switch enableSwitch;
 
-	Alarm theAlarm;
+	private Alarm theAlarm;
 	private CreateAlarmViewModel createAlarmViewModel;
 
 	private int hour;
@@ -84,7 +84,7 @@ public class AlarmActivity extends ComponentActivity {
 		scheduleAlarm.setOnClickListener(v -> {
 			updateAlarm();
 			if (theAlarm.isEnable()) {
-				theAlarm.schedule(getApplicationContext());
+				theAlarm.schedulePreAlarm(getApplicationContext());
 			}else{
 				theAlarm.cancelAlarm(getApplicationContext());
 			}

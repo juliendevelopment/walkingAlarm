@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import be.arte.walkingalarm.broadcastreceiver.AlarmBroadcastReceiver;
+import be.arte.walkingalarm.broadcastreceiver.PreAlarmBroadcastReceiver;
 import be.arte.walkingalarm.createalarm.DayUtil;
 
 @Entity(tableName = "alarm_table")
@@ -84,45 +85,77 @@ public class Alarm {
 		this.steps = steps;
 	}
 
+
+
+	public void schedulePreAlarm(Context context) {
+		Intent intent = new Intent(context, PreAlarmBroadcastReceiver.class);
+		schedulteAlarm(context, intent, createCalandarPreAlarm());
+
+		Log.i("PreAlarm", "schedule");
+	}
 	public void schedule(Context context) {
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
-        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0);
+		Calendar calandarAlarm = createCalandarAlarm();
+		schedulteAlarm(context, intent, calandarAlarm);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, minute);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-
-        // if alarm time has already passed, increment day by 1
-        if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
-            calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) + 1);
-        }
-
-
-        String toastText = null;
-        try {
-            toastText = String.format("Alarm scheduled for %s at %02d:%02d", DayUtil.toDay(calendar.get(Calendar.DAY_OF_WEEK)), hour, minute, alarmId);
+		try {
+			String toastText = String.format("Alarm scheduled for %s at %02d:%02d", DayUtil.toDay(calandarAlarm.get(Calendar.DAY_OF_WEEK)), hour, minute, alarmId);
 			toastText += "\n";
-			toastText += computeDiff(calendar.getTime(), new Date());
+			toastText += computeDiff(calandarAlarm.getTime(), new Date());
+        	Toast.makeText(context, toastText, Toast.LENGTH_LONG).show();
 		} catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        alarmManager.setExact(
-                AlarmManager.RTC_WAKEUP,
-                calendar.getTimeInMillis(),
-                alarmPendingIntent
-        );
+			e.printStackTrace();
+		}
 
         Log.i("Alarm", "schedule");
-        Toast.makeText(context, toastText, Toast.LENGTH_LONG).show();
     }
 
-    public void cancelAlarm(Context context) {
+	@NonNull
+	private void schedulteAlarm(Context context, Intent intent, Calendar calandarAlarm) {
+		PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0);
+
+		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+		Log.i("alarmManager", "date="+calandarAlarm.getTime());
+		alarmManager.setExact(
+				AlarmManager.RTC_WAKEUP,
+				calandarAlarm.getTimeInMillis(),
+				alarmPendingIntent
+		);
+	}
+
+	@NonNull
+	private Calendar createCalandarAlarm() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(System.currentTimeMillis());
+		calendar.set(Calendar.HOUR_OF_DAY, hour);
+		calendar.set(Calendar.MINUTE, minute);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+
+		// if alarm time has already passed, increment day by 1
+		if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
+			calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) + 1);
+		}
+		return calendar;
+	}
+
+	@NonNull
+	private Calendar createCalandarPreAlarm() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(System.currentTimeMillis());
+		calendar.set(Calendar.HOUR_OF_DAY, hour);
+		calendar.set(Calendar.MINUTE, minute - 10);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+
+		// if alarm time has already passed, increment day by 1
+		if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
+			calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) + 1);
+		}
+		return calendar;
+	}
+
+	public void cancelAlarm(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
         PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0);
